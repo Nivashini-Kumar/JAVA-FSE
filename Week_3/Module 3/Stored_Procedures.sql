@@ -1,5 +1,3 @@
--- TABLE CREATION
-
 CREATE TABLE Accounts (
     AccountID NUMBER PRIMARY KEY,
     AccountType VARCHAR2(20),
@@ -13,7 +11,6 @@ CREATE TABLE Employees (
     Salary NUMBER
 );
 
--- SAMPLE DATA
 
 INSERT INTO Accounts VALUES (1001,'SAVINGS',10000);
 INSERT INTO Accounts VALUES (1002,'SAVINGS',15000);
@@ -25,8 +22,6 @@ INSERT INTO Employees VALUES (3,'David',102,55000);
 
 COMMIT;
 
--- SCENARIO 1
--- Process Monthly Interest
 
 CREATE OR REPLACE PROCEDURE ProcessMonthlyInterest
 IS
@@ -37,19 +32,14 @@ BEGIN
 
     COMMIT;
 END;
-/
 
 BEGIN
     ProcessMonthlyInterest;
 END;
-/
 
--- VERIFY
 
 SELECT * FROM Accounts;
 
--- SCENARIO 2
--- Update Employee Bonus
 
 CREATE OR REPLACE PROCEDURE UpdateEmployeeBonus
 (
@@ -64,19 +54,14 @@ BEGIN
 
     COMMIT;
 END;
-/
 
 BEGIN
     UpdateEmployeeBonus(101,10);
 END;
-/
 
--- VERIFY
 
 SELECT * FROM Employees;
 
--- SCENARIO 3
--- Transfer Funds
 
 CREATE OR REPLACE PROCEDURE TransferFunds
 (
@@ -114,13 +99,9 @@ BEGIN
     END IF;
 
 END;
-/
 
 BEGIN
     TransferFunds(1001,1002,500);
 END;
-/
-
--- VERIFY
 
 SELECT * FROM Accounts;

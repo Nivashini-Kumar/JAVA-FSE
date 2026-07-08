@@ -1,5 +1,3 @@
--- TABLE CREATION
-
 CREATE TABLE Customers (
     CustomerID NUMBER PRIMARY KEY,
     CustomerName VARCHAR2(50),
@@ -15,7 +13,6 @@ CREATE TABLE Loans (
     DueDate DATE
 );
 
--- SAMPLE DATA
 
 INSERT INTO Customers VALUES (1,'John',65,15000,'FALSE');
 INSERT INTO Customers VALUES (2,'Mary',45,8000,'FALSE');
@@ -28,9 +25,6 @@ INSERT INTO Loans VALUES (103,3,7,SYSDATE+10);
 INSERT INTO Loans VALUES (104,4,9,SYSDATE+25);
 
 COMMIT;
-
--- SCENARIO 1
--- Apply 1% Discount for Customers Above 60
 
 SET SERVEROUTPUT ON;
 
@@ -55,14 +49,10 @@ BEGIN
 
     COMMIT;
 END;
-/
 
--- VERIFY
 
 SELECT * FROM Loans;
 
--- SCENARIO 2
--- Promote Customers to VIP
 
 BEGIN
     FOR cust IN (
@@ -85,14 +75,11 @@ BEGIN
 
     COMMIT;
 END;
-/
 
--- VERIFY
+
 
 SELECT * FROM Customers;
 
--- SCENARIO 3
--- Loan Due Reminder
 
 BEGIN
     FOR loan_rec IN (
@@ -115,8 +102,5 @@ BEGIN
 
     END LOOP;
 END;
-/
-
--- VERIFY
 
 SELECT * FROM Loans;
