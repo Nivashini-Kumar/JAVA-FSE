@@ -1,8 +1,15 @@
 package com.bluee.spring_learn.model;
 
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
+
 public class Country {
 
+    @NotBlank(message = "Country code cannot be blank")
+    @Size(min = 2, max = 2, message = "Country code must be exactly 2 characters")
     private String code;
+
+    @NotBlank(message = "Country name cannot be blank")
     private String name;
 
     public Country() {
