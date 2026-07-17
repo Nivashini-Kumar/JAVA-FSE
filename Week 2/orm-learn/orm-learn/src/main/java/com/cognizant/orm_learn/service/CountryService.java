@@ -1,7 +1,5 @@
 package com.cognizant.orm_learn.service;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,12 +13,14 @@ public class CountryService {
     @Autowired
     private CountryRepository countryRepository;
 
-    public Country getCountry(String code) throws CountryNotFoundException {
-        return countryRepository.findById(code)
-                .orElseThrow(() -> new CountryNotFoundException("Country not found"));
-    }
+    public Country findCountryByCode(String code) throws CountryNotFoundException {
 
-    public List<Country> searchCountries(String text) {
-        return countryRepository.findByNameContaining(text);
+        Country country = countryRepository.findById(code).orElse(null);
+
+        if (country == null) {
+            throw new CountryNotFoundException("Country not found");
+        }
+
+        return country;
     }
 }

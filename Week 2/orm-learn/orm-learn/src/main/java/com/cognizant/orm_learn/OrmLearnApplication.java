@@ -5,6 +5,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import com.cognizant.orm_learn.exception.CountryNotFoundException;
 import com.cognizant.orm_learn.model.Country;
 import com.cognizant.orm_learn.service.CountryService;
 
@@ -19,8 +20,13 @@ public class OrmLearnApplication implements CommandLineRunner {
     }
 
     @Override
-    public void run(String... args) throws Exception {
-        Country country = countryService.findCountryByCode("IN");
-        System.out.println(country);
+    public void run(String... args) {
+
+        try {
+            Country country = countryService.findCountryByCode("IN");
+            System.out.println(country);
+        } catch (CountryNotFoundException e) {
+            System.out.println(e.getMessage());
+        }
     }
 }
