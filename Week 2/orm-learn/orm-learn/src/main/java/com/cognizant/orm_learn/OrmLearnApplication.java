@@ -19,14 +19,23 @@ public class OrmLearnApplication implements CommandLineRunner {
         SpringApplication.run(OrmLearnApplication.class, args);
     }
 
-    @Override
-    public void run(String... args) {
+   @Override
+public void run(String... args) throws Exception {
 
-        try {
-            Country country = countryService.findCountryByCode("IN");
-            System.out.println(country);
-        } catch (CountryNotFoundException e) {
-            System.out.println(e.getMessage());
-        }
+    try {
+
+        System.out.println("Before Delete:");
+        Country country = countryService.getCountry("IN");
+        System.out.println(country);
+
+        countryService.deleteCountry("IN");
+
+        System.out.println("Country deleted successfully");
+
+    } catch (CountryNotFoundException e) {
+        System.out.println(e.getMessage());
     }
 }
+}
+
+
