@@ -34,14 +34,12 @@ public class CountryService {
         Country country = getCountry(code);
         country.setName(newName);
     }
+
+    @Transactional
+    public void deleteCountry(String code)
+            throws CountryNotFoundException {
+
+        Country country = getCountry(code);
+        countryRepository.delete(country);
+    }
 }
-
-@Transactional
-public void deleteCountry(String code) throws CountryNotFoundException {
-
-    Country country = getCountry(code);
-
-    countryRepository.delete(country);
-}
-
-
