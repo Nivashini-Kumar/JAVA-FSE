@@ -3,7 +3,7 @@ import IndianPlayers from "./IndianPlayers";
 
 function App() {
 
-    const flag = true;
+    const flag = false;
 
     if (flag) {
         return <ListofPlayers />;
