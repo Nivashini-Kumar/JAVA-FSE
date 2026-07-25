@@ -1,5 +1,7 @@
 package com.cognizant.orm_learn;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -19,23 +21,61 @@ public class OrmLearnApplication implements CommandLineRunner {
         SpringApplication.run(OrmLearnApplication.class, args);
     }
 
-   @Override
-public void run(String... args) throws Exception {
+    @Override
+    public void run(String... args) throws Exception {
 
-    try {
+        // Uncomment ONLY ONE test at a time.
 
-        System.out.println("Before Delete:");
-        Country country = countryService.getCountry("IN");
-        System.out.println(country);
+        testGetCountry();
+        // testUpdateCountry();
+        // testDeleteCountry();
+        // testSearchCountries();
+    }
 
-        countryService.deleteCountry("IN");
+    private void testGetCountry() {
 
-        System.out.println("Country deleted successfully");
+        System.out.println("----- Get Country -----");
 
-    } catch (CountryNotFoundException e) {
-        System.out.println(e.getMessage());
+        try {
+            Country country = countryService.getCountry("IN");
+            System.out.println(country);
+        } catch (CountryNotFoundException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    private void testUpdateCountry() {
+
+        System.out.println("----- Update Country -----");
+
+        try {
+            countryService.updateCountry("IN", "India Updated");
+            System.out.println(countryService.getCountry("IN"));
+        } catch (CountryNotFoundException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    private void testDeleteCountry() {
+
+        System.out.println("----- Delete Country -----");
+
+        try {
+            countryService.deleteCountry("IN");
+            System.out.println("Country deleted successfully");
+        } catch (CountryNotFoundException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    private void testSearchCountries() {
+
+        System.out.println("----- Search Countries -----");
+
+        List<Country> countries = countryService.searchCountries("ou");
+
+        for (Country country : countries) {
+            System.out.println(country);
+        }
     }
 }
-}
-
-
