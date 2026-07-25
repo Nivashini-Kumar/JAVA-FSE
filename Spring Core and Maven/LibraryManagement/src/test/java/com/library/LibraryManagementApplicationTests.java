@@ -1,13 +1,13 @@
-package com.bluee.spring_learn;
+package com.library;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class SpringLearnApplicationTests {
+class LibraryManagementApplicationTests {
 
-	@Test
-	void contextLoads() {
-	}
+    @Test
+    void contextLoads() {
 
+    }
 }
