@@ -1,8 +1,9 @@
-package com.cognizant.jpa_comparison.repository;
+package com.cognizant.orm_learn.repository;
 
-import com.cognizant.jpa_comparison.model.Country;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
+
+import com.cognizant.orm_learn.model.Country;
 
 @Repository
 public interface CountryRepository extends JpaRepository<Country, String> {

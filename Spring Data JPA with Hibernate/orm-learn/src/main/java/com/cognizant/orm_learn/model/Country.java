@@ -3,15 +3,10 @@ package com.cognizant.orm_learn.model;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
-import jakarta.persistence.NamedQuery;
 import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "country")
-@NamedQuery(
-    name = "Country.findByNameContaining",
-    query = "SELECT c FROM Country c WHERE c.name LIKE CONCAT('%', :text, '%') ORDER BY c.name"
-)
 public class Country {
 
     @Id
@@ -47,7 +42,9 @@ public class Country {
 
     @Override
     public String toString() {
-        return "Country [code=" + code + ", name=" + name + "]";
+        return "Country{" +
+                "code='" + code + '\'' +
+                ", name='" + name + '\'' +
+                '}';
     }
 }
-
