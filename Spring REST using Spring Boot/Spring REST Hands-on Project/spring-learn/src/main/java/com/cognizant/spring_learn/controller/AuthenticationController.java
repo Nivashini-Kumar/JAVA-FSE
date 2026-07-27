@@ -1,0 +1,52 @@
+package com.cognizant.spring_learn.controller;
+
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.SignatureAlgorithm;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestHeader;
+import org.springframework.web.bind.annotation.RestController;
+
+import java.util.Base64;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
+
+@RestController
+public class AuthenticationController {
+
+    @GetMapping("/authenticate")
+    public Map<String, String> authenticate(
+            @RequestHeader("Authorization") String authHeader) {
+
+        String user = getUser(authHeader);
+
+        String token = generateJwt(user);
+
+        Map<String, String> map = new HashMap<>();
+
+        map.put("token", token);
+
+        return map;
+    }
+
+    private String getUser(String authHeader) {
+
+        String encoded = authHeader.substring(6);
+
+        byte[] decodedBytes = Base64.getDecoder().decode(encoded);
+
+        String decoded = new String(decodedBytes);
+
+        return decoded.substring(0, decoded.indexOf(":"));
+    }
+
+    private String generateJwt(String user) {
+
+        return Jwts.builder()
+                .setSubject(user)
+                .setIssuedAt(new Date())
+                .setExpiration(new Date(System.currentTimeMillis() + 1200000))
+                .signWith(SignatureAlgorithm.HS256, "secretkey")
+                .compact();
+    }
+}
